@@ -1,0 +1,46 @@
+int ledPins[] = {3,6,9};
+
+int brightness = 0;    // how bright the LED is
+int fadeAmount = 5;
+
+
+void setup() {
+  Serial.begin(9600);
+  // put your setup code here, to run once:
+  int index;
+  for(index = 0; index <= 2; index++)
+
+  {
+    pinMode(ledPins[index],OUTPUT);
+  }
+  //pinMode(3,OUTPUT);
+}
+
+void loop() {
+
+  float sensorValue = analogRead(A1);
+  // put your main code here, to run repeatedly:
+  int i;
+  if (sensorValue<255)
+  {
+    analogWrite(ledPins[0], 255-sensorValue);
+    analogWrite(ledPins[2], 0);
+    delay(10);
+  }
+
+  if (sensorValue>500 && sensorValue<755 )
+  {
+    analogWrite(ledPins[0], 0);
+    analogWrite(ledPins[2], sensorValue-500);
+    delay(10);
+  }
+
+  if (sensorValue>755 )
+  {
+    analogWrite(ledPins[0], 0);
+    analogWrite(ledPins[2], 255);
+    delay(10);
+  }
+  //analogWrite(3, HIGH);
+
+}

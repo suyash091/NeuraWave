@@ -1,0 +1,22 @@
+#include <Servo.h>             //Servo library
+
+Servo servo_test;        //initialize a servo object for the connected servo
+
+int angle = 0;
+
+void setup() {
+
+  Serial.begin(9600);
+  servo_test.attach(8);
+}
+void loop() {
+  float sensorValue = analogRead(A1);
+  float millivolt = (sensorValue/1023)*5;
+  //digitalWrite(9, LOW);
+  if (sensorValue>500) {
+    servo_test.write(30);
+  delay(103);
+  servo_test.write(0);
+  delay(2000);
+}
+}

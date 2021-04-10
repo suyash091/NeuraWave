@@ -1,0 +1,32 @@
+#include <Servo.h>             //Servo library
+
+Servo servo_test;        //initialize a servo object for the connected servo
+
+int angle = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+  servo_test.attach(9);      // attach the signal pin of servo to pin9 of arduino
+
+}
+
+void loop()
+{
+  float sensorValue = analogRead(A1);
+  float millivolt = (sensorValue/1023)*5;
+
+  Serial.print("sensor Value: ");
+  if (sensorValue<200) {
+    Serial.println(sensorValue);
+    servo_test.write(0);
+    delay(100);
+} else {
+   // Move the servo to 0 degrees
+   // Wait for it to move to it's new position
+  Serial.println(sensorValue);
+  servo_test.write(90); // Move the servo to 90 degrees
+  delay(100);
+  } // Wait for it to move to it's new position
+
+}
